@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melvisharam Cricket League</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
+
+  <!-- SweetAlert2 for beautiful popups -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" style="display:none;">
+    <div class="spinner"></div>
+    <p>Please wait...</p>
+  </div>
+
+  <header>
+    <div class="header-item"><img src="cricket.jpeg" class="symbol"><span>Cricket Symbol</span></div>
+    <div class="header-center"><h1>MELVISHARAM CRICKET LEAGUE</h1><p>"WINNERS NEVER QUIT</p><p>QUITTERS NEVER WIN"</p></div>
+    <div class="header-item"><img src="trophy.jpeg" class="symbol"><span>Trophy Symbol</span></div>
+  </header>
+
+  <nav><p>Welcome to the Melvisharam Cricket League!</p></nav>
+
+  <main id="app-container">
+
+    <!-- LOGIN PAGE -->
+    <section id="login-page">
+      <div class="login-container">
+        <div class="login-card">
+          <h2>Admin Login</h2>
+          <form id="admin-login-form">
+            <label>Username</label><input id="admin-username" required>
+            <label>Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="admin-password" required>
+              <span class="toggle-password" onclick="togglePasswordVisibility('admin-password')">&#128065;</span>
+            </div>
+            <button>Login</button>
+          </form>
+        </div>
+
+        <div class="login-card">
+          <h2>Captain Login</h2>
+          <form id="captain-login-form">
+            <label>Email</label><input type="email" id="captain-email" required>
+            <label>Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="captain-password" required>
+              <span class="toggle-password" onclick="togglePasswordVisibility('captain-password')">&#128065;</span>
+            </div>
+            <button>Login</button>
+            <button type="button" id="show-signup-btn" class="signup-button">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIGNUP PAGE -->
+    <section id="signup-page" style="display:none;">
+      <h2>Sign Up</h2>
+      <form id="signup-form">
+        <label>Your Name</label><input id="signup-name" required>
+        <label>Phone</label><input id="signup-phone" pattern="[0-9]{10}" required>
+        <label>Email</label><input type="email" id="signup-email" required>
+        <label>Password</label><input type="password" id="signup-password" required>
+        <label>Educational Qualification</label>
+        <select id="signup-school-grade" required>
+          <option value="">Select</option><option>9th</option><option>10th</option><option>11th</option><option>12th</option><option>UG</option><option>PG</option>
+        </select>
+        <button>Sign Up</button>
+        <button type="button" id="back-to-login-btn">Back</button>
+      </form>
+    </section>
+
+    <!-- ADMIN DASHBOARD -->
+    <section id="admin-dashboard" style="display:none;">
+      <h2>Admin Dashboard</h2>
+      <form id="tournament-settings-form">
+        <label>Tournament Name:</label><input id="tournament-name" required><button>Save</button>
+      </form>
+
+      <h3>Registered Captains</h3>
+      <div class="table-container">
+        <table id="registered-captains-table"><thead>
+          <tr><th>Name</th><th>Phone</th><th>Email</th><th>School Grade</th><th>General Grade</th><th>Players</th><th>Action</th></tr>
+        </thead><tbody></tbody></table>
+        <p id="no-captains-msg" class="info-message">No captains registered yet.</p>
+      </div>
+
+      <h3>Schedule Match</h3>
+      <form id="schedule-match-form">
+        <label>Team 1:</label><input id="team1" required>
+        <label>Team 2:</label><input id="team2" required>
+        <label>Date:</label><input type="text" id="match-date" class="flatpickr" required>
+        <label>Time:</label><input type="time" id="match-time" required>
+        <button>Book Match</button>
+      </form>
+      <div id="upcoming-matches-admin"><p class="info-message">No matches scheduled.</p></div>
+      <button id="admin-logout-btn" class="logout-button">Logout</button>
+    </section>
+
+    <!-- CAPTAIN DASHBOARD -->
+    <section id="captain-dashboard" style="display:none;">
+      <div class="captain-dashboard-content">
+        <div class="left-panel"><h3>Notice Board</h3><div id="captain-upcoming-matches"><p class="info-message">No upcoming matches yet.</p></div></div>
+        <div class="right-panel">
+          <h2>Captain Dashboard</h2>
+          <form id="captain-details-form">
+            <label>Team Name</label><input id="captain-dashboard-name" required>
+            <label>General Grade</label>
+            <select id="captain-general-grade" required>
+              <option value="">Select</option><option>School Student</option><option>College Student</option><option>Graduate</option>
+            </select>
+            <h3>Team Players (11)</h3><div id="player-inputs"></div><p class="player-count-msg"></p>
+            <button>Submit Team</button>
+          </form>
+        </div>
+      </div>
+      <button id="captain-logout-btn" class="logout-button">Logout</button>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>
